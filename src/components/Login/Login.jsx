@@ -1,13 +1,8 @@
 import React from "react";
-import {
-  Container,
-  Content,
-  CTA,
-  CTALogo,
-  Description,
-} from "./Login.styles";
-import { SignUp } from "../Buttons/Button.styles";
 import Image from "../Images/Image";
+
+import { Container, Content, CTA, CTALogo, Description } from "./Login.styles";
+import { SignUp } from "../Buttons/Button.styles";
 
 export default function Login() {
   return (
