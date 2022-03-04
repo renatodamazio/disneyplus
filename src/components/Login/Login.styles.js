@@ -33,7 +33,7 @@ export const CTA = styled.div`
     align-items: center;
 `
 
-export const CTALogoOne = styled.figure`
+export const CTALogo = styled.figure`
     max-width: 600px;
     width: 100%;
     margin-bottom: 12px;
