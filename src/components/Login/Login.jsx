@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Content, CTA, CTALogoOne } from "./Login.styles";
+import { SignUp } from "../Buttons/Button.styles";
 import Image from "../Images/Image";
 
 export default function Login() {
@@ -10,6 +11,7 @@ export default function Login() {
           <CTALogoOne>
             <Image src="/images/cta-logo-one.svg" alt="CTA lOGO" />
           </CTALogoOne>
+          <SignUp>GET ALL THERE</SignUp>
         </CTA>
       </Content>
     </Container>
