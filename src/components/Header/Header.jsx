@@ -2,6 +2,7 @@ import React from "react";
 import { Nav, NavMenu, NavMenuItem } from "./Header.style";
 import Image from "../Images/Image";
 import { LoginButton } from "../Buttons/Button.styles";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "../../firebase";
 
 const Header = () => {
   const menus = [
@@ -36,6 +37,16 @@ const Header = () => {
       icon: "series-icon.svg",
     },
   ];
+
+  const handleAuth = () => {
+   const auth = getAuth();
+   const provider = new GoogleAuthProvider();
+
+   signInWithPopup(auth, provider)
+   .then((result) => console.log(result))
+   .catch((err) =>  console.log(err));
+  }
+
   return (
     <Nav>
       <Image src="/images/logo.svg" width="80px" alt="Disney+" />
@@ -55,7 +66,7 @@ const Header = () => {
           </NavMenuItem>
         ))}
       </NavMenu>
-      <LoginButton>LOGIN</LoginButton>
+      <LoginButton onClick={handleAuth}>LOGIN</LoginButton>
     </Nav>
   );
 };
