@@ -10,7 +10,7 @@ export const ImageSlider = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    autoplay: true,
+    autoplay: false,
     centerMode: true,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -30,21 +30,54 @@ export const ImageSlider = () => {
       url: "/images/slider-badging.jpg",
     },
     {
-        title: "image",
-        url: "/images/slider-scales.jpg",
-      },
+      title: "image",
+      url: "/images/slider-scales.jpg",
+    },
   ];
 
   return (
     <div>
       <Carousel {...settings}>
         {banners.map((img) => (
-          <Image src={img.url} alt={img.title} width="100%" />
+          <Wrap>
+            <span>
+              <Image src={img.url} alt={img.title} width="100%" />
+            </span>
+          </Wrap>
         ))}
       </Carousel>
     </div>
   );
 };
+
+const Wrap = styled.div`
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+
+  span {
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,
+      rgb(0 0 0 / 73%) 0px 16px 10px -10px;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    padding: 4px 8px;
+    border: 0px solid rgba(249, 249, 249, 0.8);
+    transition-duration: 300ms;
+
+    img {
+        width: 100%;
+        height: 100%:
+    }
+
+    &:hover {
+        padding: 0;
+        border: 4px solid rgba(249, 249, 249, 0.8);
+    }
+  }
+`;
 
 const Carousel = styled(Slider)`
   margin-top: 20px;
@@ -69,6 +102,10 @@ const Carousel = styled(Slider)`
 
   li.slick-active button:before {
     color: white;
+  }
+
+  .slick-list {
+    padding-bottom: 33px !important;
   }
 `;
 
