@@ -17,3 +17,18 @@ export const SignUp = styled.a`
         background-color: #0483ee;
     }
 `
+export const LoginButton = styled.button`
+    cursor: pointer;
+    border: 1px solid #f9f9f9;
+    background: transparent;
+    color: #f9f9f9;
+    border-radius: 4px;
+    padding: 8px 16px;
+    transition: .250s ease-in;
+    letter-spacing: 1.5px;
+
+    &:hover {
+        color: #090b13;
+        background: #f9f9f9;
+    }
+`

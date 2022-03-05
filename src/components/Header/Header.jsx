@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav, NavMenu, NavMenuItem } from "./Header.style";
 import Image from "../Images/Image";
-import { Link } from "react-router-dom";
+import { LoginButton } from "../Buttons/Button.styles";
 
 const Header = () => {
   const menus = [
@@ -55,6 +55,7 @@ const Header = () => {
           </NavMenuItem>
         ))}
       </NavMenu>
+      <LoginButton>LOGIN</LoginButton>
     </Nav>
   );
 };
