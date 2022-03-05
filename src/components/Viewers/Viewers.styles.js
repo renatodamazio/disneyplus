@@ -29,7 +29,9 @@ export const Container = styled.div`
   }
 
   &:hover {
-    border-color: #f9f9f9;
+    transform: scale(1.05);
+    box-shadow: rgb(0 0 0 / 80%) 0px 40px 58px -16px, rgb(0 0 0 / 72%) 0px 30px 22px -10px;
+    border-color: rgb(249, 249, 249, 0.8);
 
     ${Video} {
       opacity: 1;
