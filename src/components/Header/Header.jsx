@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Nav, NavMenu, NavMenuItem } from "./Header.style";
 import Image from "../Images/Image";
 import { LoginButton } from "../Buttons/Button.styles";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "../../firebase";
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   selectUserEmail,
   selectUserName,
@@ -12,6 +13,7 @@ import {
 } from "../store/reducers/User/userSlice";
 const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const userName = useSelector(selectUserName);
   const userPhoto = useSelector(selectUserPhoto);
@@ -49,6 +51,16 @@ const Header = () => {
       icon: "series-icon.svg",
     },
   ];
+
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        setUser(user);
+        navigate.push("/home");
+      }
+    })
+  }, [])
 
   const handleAuth = () => {
     const auth = getAuth();
