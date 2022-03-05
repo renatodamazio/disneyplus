@@ -67,5 +67,4 @@ export const NavMenuItem = styled.li`
             transition: .250s ease-in-out;
         }
     }
-
 `

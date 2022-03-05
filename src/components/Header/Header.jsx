@@ -1,14 +1,20 @@
 import React, { useEffect } from "react";
 import { Nav, NavMenu, NavMenuItem } from "./Header.style";
 import Image from "../Images/Image";
-import { LoginButton } from "../Buttons/Button.styles";
-import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "../../firebase";
+import { LoginButton, SignOutButton, Dropdown } from "../Buttons/Button.styles";
+import {
+  getAuth,
+  signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+} from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  selectUserEmail,
   selectUserName,
   selectUserPhoto,
+  signOutState,
   setUserLoginDetails,
 } from "../store/reducers/User/userSlice";
 const Header = () => {
@@ -17,7 +23,6 @@ const Header = () => {
 
   const userName = useSelector(selectUserName);
   const userPhoto = useSelector(selectUserPhoto);
-  const userEmail = useSelector(selectUserEmail);
 
   const menus = [
     {
@@ -57,13 +62,23 @@ const Header = () => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         setUser(user);
-        navigate.push("/home");
+        navigate("/home");
       }
-    })
-  }, [])
+    });
+  }, [userName]);
 
   const handleAuth = () => {
     const auth = getAuth();
+
+    if (userName) {
+      return signOut(auth)
+        .then(() => {
+          dispatch(signOutState());
+          navigate("/");
+        })
+        .catch((err) => alert(err));
+    }
+
     const provider = new GoogleAuthProvider();
 
     signInWithPopup(auth, provider)
@@ -105,7 +120,7 @@ const Header = () => {
           <LoginButton onClick={handleAuth}>LOGIN</LoginButton>
         </>
       ) : (
-        <>
+        <SignOutButton>
           <Image
             src={userPhoto}
             alt={userName}
@@ -113,7 +128,10 @@ const Header = () => {
             height="50px"
             style={{ borderRadius: "100%", border: "2px solid #f9f9f9" }}
           />
-        </>
+          <Dropdown>
+            <span onClick={handleAuth}>Sign out</span>
+          </Dropdown>
+        </SignOutButton>
       )}
     </Nav>
   );
