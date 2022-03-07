@@ -26,11 +26,15 @@ export const Container = styled.div`
     transition: opacity 500ms ease-in-out 0s;
     z-index: 1;
     position: relative;
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 
   &:hover {
     transform: scale(1.05);
-    box-shadow: rgb(0 0 0 / 80%) 0px 40px 58px -16px, rgb(0 0 0 / 72%) 0px 30px 22px -10px;
+    box-shadow: rgb(0 0 0 / 80%) 0px 40px 58px -16px,
+      rgb(0 0 0 / 72%) 0px 30px 22px -10px;
     border-color: rgb(249, 249, 249, 0.8);
 
     ${Video} {
