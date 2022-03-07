@@ -1,10 +1,22 @@
-import React from "react";
 import Image from "../Images/Image";
-
 import { Container, Content, CTA, CTALogo, Description } from "./Login.styles";
 import { SignUp } from "../Buttons/Button.styles";
+import { getAuth, onAuthStateChanged } from "../../firebase";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        navigate("/home");
+      }
+    });
+  }, []);
+  
   return (
     <Container>
       <Content>
