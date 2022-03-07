@@ -27,7 +27,7 @@ const Header = () => {
   const menus = [
     {
       title: "HOME",
-      url: "/",
+      url: "/home",
       icon: "home-icon.svg",
     },
     {
@@ -100,6 +100,10 @@ const Header = () => {
       <Image src="/images/logo.svg" width="80px" alt="Disney+" />
       {!userName ? (
         <>
+          <LoginButton onClick={handleAuth}>LOGIN</LoginButton>
+        </>
+      ) : (
+        <>
           <NavMenu>
             {menus.map((menu) => (
               <NavMenuItem key={menu.title}>
@@ -115,22 +119,19 @@ const Header = () => {
               </NavMenuItem>
             ))}
           </NavMenu>
-
-          <LoginButton onClick={handleAuth}>LOGIN</LoginButton>
+          <SignOutButton>
+            <Image
+              src={userPhoto}
+              alt={userName}
+              width="50px"
+              height="50px"
+              style={{ borderRadius: "100%", border: "2px solid #f9f9f9" }}
+            />
+            <Dropdown>
+              <span onClick={handleAuth}>Sign out</span>
+            </Dropdown>
+          </SignOutButton>
         </>
-      ) : (
-        <SignOutButton>
-          <Image
-            src={userPhoto}
-            alt={userName}
-            width="50px"
-            height="50px"
-            style={{ borderRadius: "100%", border: "2px solid #f9f9f9" }}
-          />
-          <Dropdown>
-            <span onClick={handleAuth}>Sign out</span>
-          </Dropdown>
-        </SignOutButton>
       )}
     </Nav>
   );

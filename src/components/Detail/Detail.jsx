@@ -67,7 +67,7 @@ export const Detail = () => {
               <Text variation="subtitle">
                 {detailData.subTitle} <br />
               </Text>
-              <Text>{detailData.description}</Text>
+              <Text variation="description">{detailData.description}</Text>
             </Wrap>
           </ContentMeta>
         </Banner>

@@ -120,13 +120,14 @@ export const Button = styled.button`
 
 export const Text = styled.p`
   color: rgb(249, 249, 249);
-  font-size: ${(props) => (props.variation === "subtitle" ? "20px" : "15px")};
+  font-size: ${(props) => (props.variation === "subtitle" ? "15px" : "20px")};
   min-height: 20px;
   text-align: left;
-  line-height: 1.4px;
   padding: 16px 0;
+  max-width: ${(props) => (props.variation === "subtitle" ? "100%" : "50%")};
 
   @media (max-width: 758px) {
     font-size: ${(props) => (props.variation === "subtitle" ? "14px" : "12px")};
+    max-width: 100%;
   }
 `;
