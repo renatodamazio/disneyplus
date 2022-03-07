@@ -62,7 +62,6 @@ const Header = () => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         setUser(user);
-        navigate("/home");
       }
     });
   }, [userName]);
