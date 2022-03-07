@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Nav, NavMenu, NavMenuItem } from "./Header.style";
 import Image from "../Images/Image";
 import { Link } from "react-router-dom";
@@ -59,18 +59,18 @@ const Header = () => {
   ];
 
   useEffect(() => {
-   const fetchUserData = () => {
-    const auth = getAuth();
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        setUser(user);
-        navigate("/home");
-      }
-    });
-   }
+    async function fetchUserData () {
+      const auth = getAuth();
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          setUser(user);
+          navigate("/home");
+        }
+      });
+    };
 
-   fetchUserData();
-  }, [userName]);
+    fetchUserData();
+  }, []);
 
   const handleAuth = () => {
     const auth = getAuth();
