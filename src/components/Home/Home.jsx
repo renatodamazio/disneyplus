@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Content, Grid, Wrap } from "./Home.style";
 import ImageSlider from "../Slider/ImageSlider";
 import Viewers from "../Viewers/Viewers";
+import { Recomendations } from "../Recomendations/Recomendations";
 export const Home = () => {
   const viewerContent = [
     {
@@ -40,9 +41,15 @@ export const Home = () => {
         <Wrap>
           <Grid>
             {viewerContent.map((viewer, key) => (
-              <Viewers src={viewer.src} key={key} videoSrc={viewer.video}/>
+              <Viewers src={viewer.src} key={key} videoSrc={viewer.video} />
             ))}
           </Grid>
+        </Wrap>
+      </Content>
+
+      <Content>
+        <Wrap>
+          <Recomendations />
         </Wrap>
       </Content>
     </Container>

@@ -17,15 +17,21 @@ export const Content = styled.section`
 
 export const Wrap = styled.div`
   padding: 0 36px;
-`
+`;
 
 export const Grid = styled.div`
   display: grid;
   grid-gap: 25px;
   gap: 25px;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(
+    ${(props) => (props.columns ? props.columns : 5)},
+    minmax(0, 1fr)
+  );
 
   @media (max-width: 768px) {
-      grid-template-columns: repeat(1, minmax(0, 1fr));
+    grid-template-columns: repeat(
+      ${(props) => (props.responsive ? props.responsive : 1)},
+      minmax(0, 1fr)
+    );
   }
 `;

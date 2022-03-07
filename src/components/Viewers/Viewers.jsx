@@ -2,6 +2,12 @@ import React from "react";
 import Image from "../Images/Image";
 import { Container, Video } from "./Viewers.styles";
 
+export const ViewerCard = () => {
+  return (
+    <div>Hello</div>
+  )
+}
+
 export const Viewers = ({ src, videoSrc }) => {
   return (
     <Container>
