@@ -6,14 +6,15 @@ import { Link } from "react-router-dom";
 import Text from "../Text/Text";
 
 export const Recomendations = ({ title, items }) => {
+  console.log(items);
   return (
     <Container>
       <Content>
         <Text type="h4">{title}</Text>
         <Grid columns={4} responsive={2}>
-          {items.map((item) => (
-            <Link to={item.url}>
-              <ViewerImage src={item.src} />
+          {items.map((item, index) => (
+            <Link key={index} to={item.url || "/"}>
+              <ViewerImage src={item.backgroundImg} alt={item.title} />
             </Link>
           ))}
         </Grid>

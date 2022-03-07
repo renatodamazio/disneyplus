@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+/* eslint-disable no-sequences */
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Container, Content, Grid, Wrap } from "./Home.style";
 import ImageSlider from "../Slider/ImageSlider";
 import Viewers from "../Viewers/Viewers";
 import { Recomendations } from "../Recomendations/Recomendations";
 import { db, collection, getDocs } from "../../firebase";
 import { selectUserName } from "../store/reducers/User/userSlice.js";
-import { setMovies } from "../store/reducers/Movies/movieSlicer";
 
 export const Home = () => {
   const viewerContent = [
@@ -37,50 +37,49 @@ export const Home = () => {
     },
   ];
 
-  const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
-  let recommended = [];
-  let trending = [];
-  let newDisney = [];
-  let originals = [];
+
+  const [recommended, setRecommended] = useState([]);
+  const [destakHome, setDestakHome] = useState([]);
+  const [trending, setTrending] = useState([]);
+  const [newDisney, setNewDisney] = useState([]);
+  const [originals, setOriginals] = useState([]);
+
+  const getFirebaseDestakHome = async () => {
+    const docRef = collection(db, "movies");
+    const response = await getDocs(docRef);
+    setDestakHome(response);
+  };
 
   useEffect(() => {
-    const movies = async () => {
-      const docRef = collection(db, "movies");
-      const querySnapshot = await getDocs(docRef);
+    destakHome.forEach((doc) => {
+      let movie = doc.data();
 
-      querySnapshot.forEach((doc) => {
-        let movie = doc.data();
+      switch (movie.type) {
+        case "recommend":
+          setRecommended((prev) => [...prev, movie]);
+          break;
+        case "new":
+          setNewDisney((prev) => [...prev, movie]);
+          break;
+        case "trending":
+          setTrending((prev) => [...prev, movie]);
+          break;
+        case "original":
+          setOriginals((prev) => [...prev, movie]);
+          break;
+        default:
+      }
+    });
+  }, [destakHome]);
 
-        switch (movie.type) {
-          case "recommend":
-            recommended.push({ id: doc.id, movie });
-            break;
-          case "new":
-            newDisney.push({ id: doc.id, movie });
-            break;
-          case "trending":
-            trending.push({ id: doc.id, movie });
-            break;
-          case "original":
-            originals.push({ id: doc.id, movie });
-            break;
-          default:
-        }
-      });
-
-      dispatch(
-        setMovies({
-          recommend: recommended,
-          newDisney: newDisney,
-          original: originals,
-          trending: trending,
-        })
-      );
-    };
-
-    movies();
+  useEffect(() => {
+    getFirebaseDestakHome();
   }, []);
+
+  useEffect(() => {
+    console.log(recommended);
+  }, [recommended]);
 
   return (
     <Container>
