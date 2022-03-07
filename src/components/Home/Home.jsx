@@ -3,6 +3,14 @@ import { Container, Content, Grid, Wrap } from "./Home.style";
 import ImageSlider from "../Slider/ImageSlider";
 import Viewers from "../Viewers/Viewers";
 import { Recomendations } from "../Recomendations/Recomendations";
+
+const recomendationsArray = [
+  {
+    url: "",
+    src: "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/87F1DCF36049558159913ADFD18A800DE1121771540033EC3A7651B8FE154CEB/scale?width=400&aspectRatio=1.78&format=jpeg",
+  },
+];
+
 export const Home = () => {
   const viewerContent = [
     {
@@ -49,7 +57,19 @@ export const Home = () => {
 
       <Content>
         <Wrap>
-          <Recomendations />
+          <Recomendations title="Recomendations for You" items={recomendationsArray} />
+        </Wrap>
+      </Content>
+
+      <Content>
+        <Wrap>
+          <Recomendations title="New to Disney +" items={recomendationsArray} />
+        </Wrap>
+      </Content>
+
+      <Content>
+        <Wrap>
+          <Recomendations title="Originals" items={recomendationsArray} />
         </Wrap>
       </Content>
     </Container>
