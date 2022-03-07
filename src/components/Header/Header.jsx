@@ -59,6 +59,7 @@ const Header = () => {
   ];
 
   useEffect(() => {
+   const fetchUserData = () => {
     const auth = getAuth();
     onAuthStateChanged(auth, async (user) => {
       if (user) {
@@ -66,6 +67,9 @@ const Header = () => {
         navigate("/home");
       }
     });
+   }
+
+   fetchUserData();
   }, [userName]);
 
   const handleAuth = () => {
