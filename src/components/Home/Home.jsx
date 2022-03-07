@@ -77,11 +77,7 @@ export const Home = () => {
     if (recommended.length === 0) {
       getFirebaseDestakHome();
     }
-  }, []);
-
-  useEffect(() => {
-    console.log(recommended);
-  }, [recommended]);
+  }, [recommended.length]);
 
   return (
     <Container >

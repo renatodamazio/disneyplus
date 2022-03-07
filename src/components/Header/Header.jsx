@@ -22,6 +22,8 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [user, setUser] = useState();
+
   const userName = useSelector(selectUserName);
   const userPhoto = useSelector(selectUserPhoto);
 
@@ -59,15 +61,26 @@ const Header = () => {
   ];
 
   useEffect(() => {
-    async function fetchUserData () {
+    if (user) {
+      dispatch(
+        setUserLoginDetails({
+          name: user.displayName,
+          photo: user.photoURL,
+          email: user.email,
+        })
+      );
+    }
+  }, [dispatch, user]);
+
+  useEffect(() => {
+    async function fetchUserData() {
       const auth = getAuth();
       onAuthStateChanged(auth, async (user) => {
         if (user) {
           setUser(user);
-          navigate("/home");
         }
       });
-    };
+    }
 
     fetchUserData();
   }, []);
@@ -89,16 +102,6 @@ const Header = () => {
     signInWithPopup(auth, provider)
       .then((result) => setUser(result.user))
       .catch((err) => console.log(err));
-  };
-
-  const setUser = (user) => {
-    dispatch(
-      setUserLoginDetails({
-        name: user.displayName,
-        photo: user.photoURL,
-        email: user.email,
-      })
-    );
   };
 
   return (
