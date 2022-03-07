@@ -7,6 +7,8 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
+import { getFirestore, doc, getDocs, collection } from "firebase/firestore"
+
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_APIKEY,
   authDomain: process.env.REACT_APP_DOMAIN,
@@ -17,11 +19,19 @@ const firebaseConfig = {
   measurementId: process.env.REACT_MEASUREMENT_ID,
 };
 
-initializeApp(firebaseConfig);
+
+const initalize = initializeApp(firebaseConfig);
+const db = getFirestore(initalize);
+
 export {
+  db,
+  doc,
+  getDocs,
+  collection,
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
   onAuthStateChanged,
   signOut,
 };
+

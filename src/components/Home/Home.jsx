@@ -1,15 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Container, Content, Grid, Wrap } from "./Home.style";
 import ImageSlider from "../Slider/ImageSlider";
 import Viewers from "../Viewers/Viewers";
 import { Recomendations } from "../Recomendations/Recomendations";
-
-const recomendationsArray = [
-  {
-    url: "",
-    src: "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/87F1DCF36049558159913ADFD18A800DE1121771540033EC3A7651B8FE154CEB/scale?width=400&aspectRatio=1.78&format=jpeg",
-  },
-];
+import { db, collection, getDocs } from "../../firebase";
+import { selectUserName } from "../store/reducers/User/userSlice.js";
+import { setMovies } from "../store/reducers/Movies/movieSlicer";
 
 export const Home = () => {
   const viewerContent = [
@@ -40,6 +37,51 @@ export const Home = () => {
     },
   ];
 
+  const dispatch = useDispatch();
+  const userName = useSelector(selectUserName);
+  let recommended = [];
+  let trending = [];
+  let newDisney = [];
+  let originals = [];
+
+  useEffect(() => {
+    const movies = async () => {
+      const docRef = collection(db, "movies");
+      const querySnapshot = await getDocs(docRef);
+
+      querySnapshot.forEach((doc) => {
+        let movie = doc.data();
+
+        switch (movie.type) {
+          case "recommend":
+            recommended.push({ id: doc.id, movie });
+            break;
+          case "new":
+            newDisney.push({ id: doc.id, movie });
+            break;
+          case "trending":
+            trending.push({ id: doc.id, movie });
+            break;
+          case "original":
+            originals.push({ id: doc.id, movie });
+            break;
+          default:
+        }
+      });
+
+      dispatch(
+        setMovies({
+          recommend: recommended,
+          newDisney: newDisney,
+          original: originals,
+          trending: trending,
+        })
+      );
+    };
+
+    movies();
+  }, []);
+
   return (
     <Container>
       <Content>
@@ -57,19 +99,19 @@ export const Home = () => {
 
       <Content>
         <Wrap>
-          <Recomendations title="Recomendations for You" items={recomendationsArray} />
+          <Recomendations title="Recomendations for You" items={recommended} />
         </Wrap>
       </Content>
 
       <Content>
         <Wrap>
-          <Recomendations title="New to Disney +" items={recomendationsArray} />
+          <Recomendations title="New to Disney +" items={newDisney} />
         </Wrap>
       </Content>
 
       <Content>
         <Wrap>
-          <Recomendations title="Originals" items={recomendationsArray} />
+          <Recomendations title="Originals" items={originals} />
         </Wrap>
       </Content>
     </Container>
