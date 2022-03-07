@@ -1,4 +1,3 @@
-/* eslint-disable no-sequences */
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Container, Content, Grid, Wrap } from "./Home.style";

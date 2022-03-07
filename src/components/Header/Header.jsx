@@ -83,7 +83,7 @@ const Header = () => {
     }
 
     fetchUserData();
-  }, []);
+  }, [user]);
 
   const handleAuth = () => {
     const auth = getAuth();
