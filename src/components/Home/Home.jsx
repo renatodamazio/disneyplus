@@ -69,9 +69,8 @@ export const Home = () => {
           setOriginals((prev) => [...prev, { id: doc.id, ...movie }]);
           break;
         default:
-      } 
+      }
     });
-
   }, [destakHome]);
 
   useEffect(() => {
@@ -85,7 +84,7 @@ export const Home = () => {
   }, [recommended]);
 
   return (
-    <Container>
+    <Container >
       <Content>
         <ImageSlider />
       </Content>

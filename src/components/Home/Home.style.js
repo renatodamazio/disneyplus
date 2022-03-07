@@ -3,9 +3,7 @@ import styled from "styled-components";
 export const Container = styled.main`
   width: 100%;
   height: 100vh;
-  /* padding-top: 70px; */
-  overflow-y: auto;
-  overflow-x: hidden;
+  padding-top: 60px;
   background: url("/images/home-background.png") center/cover no-repeat fixed;
 `;
 
