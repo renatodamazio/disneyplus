@@ -6,10 +6,10 @@ export const Viewers = ({ src, videoSrc }) => {
   return (
     <Container>
       <Image src={src} width="100%" />
-      <Video src={videoSrc} autoPlay={true} loop={true} playsInline={true}>
+      <Video src={videoSrc} loop muted autoPlay controls = ''>
         <source src={videoSrc} type="video/mp4" />
       </Video>
-    </Container>
+    </Container> 
   );
 };
 

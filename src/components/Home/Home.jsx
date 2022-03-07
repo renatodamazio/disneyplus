@@ -39,8 +39,8 @@ export const Home = () => {
       <Content>
         <Wrap>
           <Grid>
-            {viewerContent.map((viewer) => (
-              <Viewers src={viewer.src} videoSrc={viewer.video}/>
+            {viewerContent.map((viewer, key) => (
+              <Viewers src={viewer.src} key={key} videoSrc={viewer.video}/>
             ))}
           </Grid>
         </Wrap>

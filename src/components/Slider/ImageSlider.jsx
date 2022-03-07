@@ -38,8 +38,8 @@ export const ImageSlider = () => {
   return (
     <div>
       <Carousel {...settings}>
-        {banners.map((img) => (
-          <Wrap>
+        {banners.map((img, key) => (
+          <Wrap key={key}>
             <span>
               <Image src={img.url} alt={img.title} width="100%" />
             </span>
