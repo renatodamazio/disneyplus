@@ -13,8 +13,8 @@ export const Recomendations = ({ title, items }) => {
         <Text type="h4">{title}</Text>
         <Grid columns={4} responsive={2}>
           {items.map((item, index) => (
-            <Link key={index} to={item.url || "/"}>
-              <ViewerImage src={item.backgroundImg} alt={item.title} />
+            <Link key={index} to={`details/${item.id}`}>
+              <ViewerImage src={item.cardImg} alt={item.title} />
             </Link>
           ))}
         </Grid>

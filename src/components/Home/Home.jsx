@@ -57,24 +57,27 @@ export const Home = () => {
 
       switch (movie.type) {
         case "recommend":
-          setRecommended((prev) => [...prev, movie]);
+          setRecommended((prev) => [...prev, { id: doc.id, ...movie }]);
           break;
         case "new":
-          setNewDisney((prev) => [...prev, movie]);
+          setNewDisney((prev) => [...prev, { id: doc.id, ...movie }]);
           break;
         case "trending":
-          setTrending((prev) => [...prev, movie]);
+          setTrending((prev) => [...prev, { id: doc.id, ...movie }]);
           break;
         case "original":
-          setOriginals((prev) => [...prev, movie]);
+          setOriginals((prev) => [...prev, { id: doc.id, ...movie }]);
           break;
         default:
-      }
+      } 
     });
+
   }, [destakHome]);
 
   useEffect(() => {
-    getFirebaseDestakHome();
+    if (recommended.length === 0) {
+      getFirebaseDestakHome();
+    }
   }, []);
 
   useEffect(() => {
