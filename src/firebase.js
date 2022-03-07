@@ -7,7 +7,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-import { getFirestore, doc, getDocs, collection } from "firebase/firestore"
+import { getFirestore, doc, getDocs, getDoc, collection } from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_APIKEY,
@@ -26,6 +26,7 @@ const db = getFirestore(initalize);
 export {
   db,
   doc,
+  getDoc,
   getDocs,
   collection,
   getAuth,

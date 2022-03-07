@@ -1,29 +1,74 @@
 /* eslint-disable no-sequences */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Content, Wrap } from "../Home/Home.style";
 import Image from "../Images/Image";
-import { Banner, ContentMeta, Controls, Player } from "./Detail.style";
+import { db, doc, getDoc } from "../../firebase";
+import { useParams } from "react-router-dom";
+
+import {
+  Banner,
+  ContentMeta,
+  Controls,
+  Button,
+  Text,
+  SmallButton,
+} from "./Detail.style";
 
 export const Detail = () => {
+  const { id } = useParams();
+  const [detailData, setDetailData] = useState({});
+
+  const fetchData = async () => {
+    const docRef = doc(db, "movies", id);
+    const docSnap = await getDoc(docRef);
+
+    setDetailData(docSnap.data());
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [id]);
+
   return (
     <Container>
       <Content style={{ paddingTop: 0 }}>
         <Banner>
-          <Image src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/49B92C046117E89BC9243A68EE277A3B30D551D4599F23C10BF0B8C1E90AEFB6/scale?width=1440&aspectRatio=1.78&format=jpeg" />
+          <Image src={detailData.backgroundImg} />
 
           <ContentMeta>
-            <Image src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/5C647DF3FFBFA343CFEA84AC715148F25F9E86F398B408010CC403E7654FB908/scale?width=1440&aspectRatio=1.78" />
+            <Image src={detailData.titleImg} />
 
-            <Controls>
-              <Wrap>
-                <Player>
+            <Wrap>
+              <Controls>
+                <Button>
+                  <Image src="/images/play-icon-black.svg" alt="Play image" />
+                  PLAY
+                </Button>
+
+                <Button variation="invert">
                   <Image
                     src="/images/play-icon-black.svg"
+                    alt="Trailer image"
                   />
-                  PLAY
-                </Player>
-              </Wrap>
-            </Controls>
+                  TRAILER
+                </Button>
+
+                <SmallButton>
+                  <span></span>
+                  <span></span>
+                </SmallButton>
+
+                <SmallButton>
+                  <span></span>
+                  <Image src="/images/group-icon.svg" alt="Group" />
+                </SmallButton>
+              </Controls>
+
+              <Text variation="subtitle">
+                {detailData.subTitle} <br />
+              </Text>
+              <Text>{detailData.description}</Text>
+            </Wrap>
           </ContentMeta>
         </Banner>
       </Content>
