@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Nav, NavMenu, NavMenuItem } from "./Header.style";
 import Image from "../Images/Image";
+import { Link } from "react-router-dom";
 import { LoginButton, SignOutButton, Dropdown } from "../Buttons/Button.styles";
 import {
   getAuth,
@@ -32,27 +33,27 @@ const Header = () => {
     },
     {
       title: "SEARCH",
-      url: "/",
+      url: "#!",
       icon: "search-icon.svg",
     },
     {
       title: "WATCHLIST",
-      url: "/",
+      url: "#!",
       icon: "watchlist-icon.svg",
     },
     {
       title: "ORIGINALS",
-      url: "/",
+      url: "#!",
       icon: "original-icon.svg",
     },
     {
       title: "MOVIES",
-      url: "/",
+      url: "#!",
       icon: "movie-icon.svg",
     },
     {
       title: "SERIES",
-      url: "/",
+      url: "#!",
       icon: "series-icon.svg",
     },
   ];
@@ -107,7 +108,7 @@ const Header = () => {
           <NavMenu>
             {menus.map((menu) => (
               <NavMenuItem key={menu.title}>
-                <a href={menu.url}>
+                <Link to={menu.url}>
                   <Image
                     src={`/images/${menu.icon}`}
                     width="20px"
@@ -115,7 +116,7 @@ const Header = () => {
                     alt={menu.title}
                   />
                   <span>{menu.title}</span>
-                </a>
+                </Link>
               </NavMenuItem>
             ))}
           </NavMenu>
